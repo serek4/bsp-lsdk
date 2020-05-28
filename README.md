@@ -32,6 +32,15 @@ build image instructions. Based on [Scalys Grapeboard BSP user guide](https://ww
     git clone https://github.com/serek4/bsp-lsdk.git
     cd bsp-lsdk && git checkout trustbox-1903.1
 
+### download [flexbuild_lsdk1903.tgz](https://www.nxp.com/design/software/embedded-software/linux-software-and-development-tools/layerscape-software-development-kit:LAYERSCAPE-SDK?&tab=Design_Tools_Tab#nogo), NXP account needed (1903 version is in previous tab), move it to bsp-lsdk directory
+
+    mv flexbuild_lsdk1903.tgz ~/trustbox/bsp-lsdk/flexbuild_lsdk1903.tgz
+
+### run `construct.sh` script. It will unpack the flexbuild_lsdk1903.tgz and apply the Grapeboard support patches
+
+    ./construct.sh
+
+
 ## building RFS
 
     source setup.env    # (on host machine)
@@ -133,7 +142,7 @@ pass `root`
 
     deluser --remove-home user
     
-a### dd new user with sudo privileges
+### add new user with sudo privileges
 
     adduser -shell /bin/bash <username>
     usermod -aG sudo <username>

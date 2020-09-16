@@ -170,6 +170,37 @@ PPA ﬁrmware (`ppa.itb`)
 
     flex-builder -c ppa -m trustbox
 
+### standalone u-boot build
+#### from `bsp-lsdk` folder
+
+start docker
+
+    source setup.env    # (on host machine)
+    flex-builder docker
+    source setup.env    # (in docker environment)
+
+download Scalys u-boot repository
+
+    git clone --recursive https://github.com/Scalys/u-boot-qoriq.git -b trustbox-2004 && cd u-boot-qoriq
+
+update external submodules
+
+    git submodule update --init --recursive
+
+choose corresponding trustbox configuration
+
+    ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu- make trustbox_qspi_defconfig
+
+optionally run menuconfig and change any options you need
+
+    ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu- make menuconfig
+
+build u-boot image
+
+    ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu- make -j 8
+
+image is in `u-boot-qoriq/` folder
+
 ### copy files to root of sdcard (in this case),<br>connect through serial and boot board in u-boot mode by interrupting system boot,<br>run these commands
 
 #### update composite firmware `trustbox_qspi_fw.itb`
